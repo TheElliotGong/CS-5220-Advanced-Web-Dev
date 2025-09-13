@@ -108,6 +108,6 @@ let summarizeOrders = (orders) =>
 console.log(JSON.stringify(summarizeOrders([
   "Panda Express,15.50,3,5",
   "Chipotle,12.75,2,5",
-  "Subway,null,1,4",
+  "Subway,,1,4",
   "Shake Shack,18,4,4"
 ])));
