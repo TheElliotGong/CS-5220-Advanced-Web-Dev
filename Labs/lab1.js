@@ -76,19 +76,27 @@ let summarizeOrders = (orders) =>
     let summary = {};
     summary["orders"] = [];
     let totalTip = 0, totalRating = 0; 
-    //Iterate through the orders and extract details
+    //Iterate through the orders and extract details. Make sure to handle "null" values appropriately.
     for(let order of orders)
     {
         let orderDetails = order.split(',');
         summary["orders"].push({
             "restaurant": orderDetails[0],
-            "cost": orderDetails[1],
-            "tip": parseInt(orderDetails[2]),
-            "rating": parseFloat(orderDetails[3])
+            "cost": typeof(parseInt(orderDetails[1])) == "number" ? parseInt(orderDetails[1]) : "null",
+            "tip": typeof(parseInt(orderDetails[2])) == "number" ? parseInt(orderDetails[2]) : "null",
+            "rating": typeof(parseFloat(orderDetails[3])) == "number" ? parseFloat(orderDetails[3]) : "null"
         });
-        //Gradually calculate total tip and rating
-        totalTip += parseInt(orderDetails[2]);
-        totalRating += parseFloat(orderDetails[3]);
+        //Gradually calculate total tip and rating if they're actually numbers.
+
+        if(!isNaN(parseInt(orderDetails[2])))
+        {
+            totalTip += parseInt(orderDetails[2]);
+        }
+        if(!isNaN(parseFloat(orderDetails[3])))
+        {
+            totalRating += parseFloat(orderDetails[3]);
+        }
+
     }
     //Calculate average tip and rating and add to summary
     summary["tipTotal"] = totalTip;
@@ -100,6 +108,6 @@ let summarizeOrders = (orders) =>
 console.log(JSON.stringify(summarizeOrders([
   "Panda Express,15.50,3,5",
   "Chipotle,12.75,2,5",
-  "Subway,,1,4",
+  "Subway,null,1,4",
   "Shake Shack,18,4,4"
 ])));
