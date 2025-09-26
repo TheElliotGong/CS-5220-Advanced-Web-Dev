@@ -1,0 +1,19 @@
+{
+  "name": "music-playlister",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx nodemon app.js"
+
+  },
+  "keywords": [],
+  "author": "Elliot Gong",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
