@@ -1,0 +1,15 @@
+{
+    "name": "asyncvsync",
+    "version": "1.0.0",
+    "description": "async versus sync demo using bcrypt ",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Cydney Auman",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^6.0.0"
+    }
+}
