@@ -7,3 +7,6 @@ app.get('/', (req, res) => {
     const { path, query, headers, body } = req;
 });
 
+app.listen(port, () => {
+    console.log(`Server started on ${port}`);
+})
