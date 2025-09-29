@@ -8,7 +8,7 @@ VERSION: 1 on 9/26/25 at 10:54 AM
 
 GET /users/:id
 
-* Path parameter: 
+* Path parameter: user id
 * Responds with the user info (excluding password).
 * Responds with an error if the path parameter is blank, incomplete, or false.
 
@@ -35,7 +35,7 @@ POST /users/login
 
 GET /playlists/get/:userID
 
-* Request is a url with 'userID' as a path parameter.
+* Path parameter: the id identifying the user that owns all the playlists.
 * Responds with the list of the playlists attached to the given user.
 * Responds with an error if the path parameter is blank, incomplete, or false.
 
@@ -43,7 +43,7 @@ GET /playlists/get/:userID
 
 POST /playlists/create
 
-* Request body is an object with a title and user id. 
+* Request body is an object with a title and user id.
 * Playlist id is automatically created, and Tracks is initiated as an empty array.
 * Responds with the playlist object (excluding its own and user id).
 * Responds with an error if the title is blank or the user id is invalid.
@@ -75,7 +75,7 @@ GET /tracks/:id
 
 * Reads API KEY from env to interact with Last.fm API.
 * Interacts with Last.fm API to get track details.
-* Responds with 
+* Responds with
 
 
 
