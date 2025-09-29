@@ -42,7 +42,7 @@ GET /playlists/get/:id
 
 
 
-POST /playlists/create/:d
+POST /playlists/create/:id
 
 * Requires Authentication header to identify user.
 * Request body is an object with a title and user id.
@@ -54,9 +54,10 @@ POST /playlists/create/:d
 
 POST /playlists/update/:id
 
+* Requires Authentication header to identify user.
 * Path parameter: Specifies which playlist to add to.
-* Request body is an object with the track's name, artist, album, and image taken. This data is found via a search request to the Last.fm API, and the track's mbid is automatically attached with the GET response.
-* Responds with the track object that was added to the playlist.
+* Request body is an object with the playlist name and the track's name, artist, album, and image taken. This data is found via a search request to the Last.fm API, and the track's mbid is automatically attached with the GET response.
+* Responds with the updated playlist.
 
 
 
