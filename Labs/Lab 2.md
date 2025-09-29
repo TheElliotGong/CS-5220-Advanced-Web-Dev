@@ -1,6 +1,6 @@
 Elliot Gong
 
-VERSION: 3 on 9/28/25 at 10:30 PM
+VERSION: 1 on 9/28/25 at 10:30 PM
 
 
 
@@ -8,6 +8,7 @@ VERSION: 3 on 9/28/25 at 10:30 PM
 
 GET /users/:id
 
+* Requires Authentication header to identify user.
 * Path parameter: user id
 * Responds with the user info (excluding password). May return user playlists as well.
 * Responds with an error if the path parameter is blank, incomplete, or false.
@@ -45,23 +46,23 @@ GET /playlists/get/:id
 POST /playlists/create/:id
 
 * Requires Authentication header to identify user.
-* Request body is an object with a title and user id.
-* Playlist id is automatically created, and Tracks is initiated as an empty array.
+* Request body is an object with an optional title and user id.
+* Playlist id is automatically created, and the tracks array is initially empty.
 * Responds with the playlist object (excluding its own and user id).
-* Responds with an error if the title is blank or the user id is invalid.
+* Responds with an error if the the user id is invalid.
 
 
 
-POST /playlists/update/:id
+POST /playlists/update/:userID/:playListID
 
-* Requires Authentication header to identify user.
-* Path parameter: Specifies which playlist to add to.
-* Request body is an object with the playlist name and the track's name, artist, album, and image taken. This data is found via a search request to the Last.fm API, and the track's mbid is automatically attached with the GET response.
+* Requires Authentication header to identify user and playlist.
+* Path parameters: Specifies which user's playlist to add to. 
+* Request body is an object with the track's name, artist, album, and image taken. This data is found via a search request to the Last.fm API, and the track's mbid is automatically attached with the GET response.
 * Responds with the updated playlist.
 
 
 
-DELETE /playlists/delete/:id
+DELETE /playlists/delete/:userID/:playListID
 
 * Path parameter: Specifies which playlist to delete.
 * Requires Authentication header to identify user.

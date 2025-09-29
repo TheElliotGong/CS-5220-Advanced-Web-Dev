@@ -75,32 +75,38 @@ let summarizeOrders = (orders) =>
 {
     let summary = {};
     summary["orders"] = [];
-    let totalTip = 0, totalRating = 0; 
+    let totalTip = 0, totalRating = 0, validRatingCount = 0; 
     //Iterate through the orders and extract details. Make sure to handle "null" values appropriately.
     for(let order of orders)
     {
         let orderDetails = order.split(',');
-        summary["orders"].push({
-            "restaurant": orderDetails[0],
-            "cost": typeof(parseInt(orderDetails[1])) == "number" ? parseInt(orderDetails[1]) : "null",
-            "tip": typeof(parseInt(orderDetails[2])) == "number" ? parseInt(orderDetails[2]) : "null",
-            "rating": typeof(parseFloat(orderDetails[3])) == "number" ? parseFloat(orderDetails[3]) : "null"
-        });
-        //Gradually calculate total tip and rating if they're actually numbers.
+        let restaurant = orderDetails[0];
+        // Use parseFloat so we preserve decimals and detect missing values as NaN
+        let cost = parseFloat(orderDetails[1]);
+        let tip = parseFloat(orderDetails[2]);
+        let rating = parseFloat(orderDetails[3]);
 
-        if(!isNaN(parseInt(orderDetails[2])))
-        {
-            totalTip += parseInt(orderDetails[2]);
+        summary["orders"].push({
+            "restaurant": restaurant,
+            // store numeric values when valid, otherwise the string "null"
+            "cost": !isNaN(cost) ? cost : "null",
+            "tip": !isNaN(tip) ? tip : "null",
+            "rating": !isNaN(rating) ? rating : "null"
+        });
+
+        // Gradually calculate total tip and rating and count valid entries
+        if(!isNaN(tip)) {
+            totalTip += tip;
         }
-        if(!isNaN(parseFloat(orderDetails[3])))
-        {
-            totalRating += parseFloat(orderDetails[3]);
+        if(!isNaN(rating)) {
+            totalRating += rating;
+            validRatingCount++;
         }
 
     }
     //Calculate average tip and rating and add to summary
     summary["tipTotal"] = totalTip;
-    summary["averageRating"] = totalRating/orders.length;
+    summary["averageRating"] = totalRating/validRatingCount;
     return summary;
 
 };
